@@ -78,6 +78,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>socks_for_test_task</finalName>
     </build>
 
 </project>
