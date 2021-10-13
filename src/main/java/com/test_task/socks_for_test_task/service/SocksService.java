@@ -43,7 +43,7 @@ public class SocksService {
                     findSocks.setQuantity(findSocks.getQuantity() - socks.getQuantity());
                 } else throw new ApiInvalidParameterException("Not enough socks!");
             }
-            else throw new ApiInvalidParameterException("Request parameters are missing!");
+            else throw new ApiInvalidParameterException("No socks of the specified parameters!");
         }
         else throw new ApiInvalidParameterException("Request parameters have an incorrect format!");
     }
@@ -73,6 +73,7 @@ public class SocksService {
                 default:
                     throw new ApiInvalidParameterException("Operation name has an incorrect format!");
             }
+            throw new ApiInvalidParameterException("No socks of the specified parameters!");
         }
         throw new ApiInvalidParameterException("Parameters don't exist!");
     }
