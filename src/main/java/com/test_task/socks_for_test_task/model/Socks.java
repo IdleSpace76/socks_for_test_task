@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -21,16 +18,16 @@ public class Socks {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank(message = "Pls, enter a color")
+    @NotBlank
     private String color;
 
     @Column(name = "cotton_part")
-    @Min(value = 0, message = "bad")
-    @Max(value = 100, message = "bad")
-    @NotNull(message = "bad")
+    @Min(0)
+    @Max(100)
+    @NotNull
     private int cottonPart;
 
-    @Min(value = 0, message = "bad")
+    @PositiveOrZero
     private int quantity;
 
     @Override

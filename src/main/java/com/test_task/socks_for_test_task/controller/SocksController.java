@@ -3,8 +3,6 @@ package com.test_task.socks_for_test_task.controller;
 import com.test_task.socks_for_test_task.model.Socks;
 import com.test_task.socks_for_test_task.service.SocksService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +24,7 @@ public class SocksController {
     }
 
     @PostMapping("/outcome")
-    public void outcome(@RequestBody Socks socks){
+    public void outcome(@Valid @RequestBody Socks socks){
         socksService.outcome(socks);
     }
 
