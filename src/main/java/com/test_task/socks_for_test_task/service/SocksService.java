@@ -34,19 +34,14 @@ public class SocksService {
     }
 
     public void outcome(@NonNull Socks socks) {
-        Optional<Socks> socksOptional = socksRepository
-                .findByColorAndCottonPart(socks.getColor(), socks.getCottonPart());
-        if (socksOptional.isPresent()) {
-            Socks findSocks = socksOptional.get();
-            if (findSocks.getQuantity() >= socks.getQuantity()) {
-                findSocks.setQuantity(findSocks.getQuantity() - socks.getQuantity());
-            }
-            else {
-                throw new ApiInvalidParameterException("Not enough socks!");
-            }
+        Socks findSocks = socksRepository
+                .findByColorAndCottonPart(socks.getColor(), socks.getCottonPart()).orElseThrow(()
+                        -> new ApiInvalidParameterException("No socks of the specified parameters!"));
+        if (findSocks.getQuantity() >= socks.getQuantity()) {
+            findSocks.setQuantity(findSocks.getQuantity() - socks.getQuantity());
         }
         else {
-            throw new ApiInvalidParameterException("No socks of the specified parameters!");
+            throw new ApiInvalidParameterException("Not enough socks!");
         }
     }
 

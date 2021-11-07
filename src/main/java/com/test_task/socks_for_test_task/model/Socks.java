@@ -12,11 +12,12 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(name = "socks")
 public class Socks {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotBlank
     private String color;
@@ -24,18 +25,17 @@ public class Socks {
     @Column(name = "cotton_part")
     @Min(0)
     @Max(100)
-    @NotNull
-    private int cottonPart;
+    private Integer cottonPart;
 
     @PositiveOrZero
-    private int quantity;
+    private Integer quantity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Socks socks = (Socks) o;
-        return id == socks.id && cottonPart == socks.cottonPart && color.equals(socks.color);
+        return id.equals(socks.id) && color.equals(socks.color) && cottonPart.equals(socks.cottonPart);
     }
 
     @Override
