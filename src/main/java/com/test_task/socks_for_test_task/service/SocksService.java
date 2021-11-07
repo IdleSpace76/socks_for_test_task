@@ -16,6 +16,8 @@ public class SocksService {
 
     private final SocksRepository socksRepository;
 
+    private static final String EMPTY_SOCKS_WITH_PARAM = "No socks of the specified parameters!";
+
     @Autowired
     public SocksService(SocksRepository socksRepository) {
         this.socksRepository = socksRepository;
@@ -45,32 +47,23 @@ public class SocksService {
         }
     }
 
-    public int countOfSocks(@NonNull String color, @NonNull String operation, int cottonPart){
-        Optional<Socks> optionalSocks;
-
+    public int countOfSocks(@NonNull String color, String operation, int cottonPart){
         switch (operation) {
             case "moreThan":
-                optionalSocks = socksRepository.findByColorAndCottonPartGreaterThan(color, cottonPart);
-                if (optionalSocks.isPresent()) {
-                    return optionalSocks.get().getQuantity();
-                }
-                break;
+                return socksRepository.findByColorAndCottonPartGreaterThan(color, cottonPart)
+                        .map(Socks::getQuantity)
+                        .orElseThrow(() -> new ApiInvalidParameterException(EMPTY_SOCKS_WITH_PARAM));
             case "lessThan":
-                optionalSocks = socksRepository.findByColorAndCottonPartLessThan(color, cottonPart);
-                if (optionalSocks.isPresent()) {
-                    return optionalSocks.get().getQuantity();
-                }
-                break;
+                return socksRepository.findByColorAndCottonPartLessThan(color, cottonPart)
+                        .map(Socks::getQuantity)
+                        .orElseThrow(() -> new ApiInvalidParameterException(EMPTY_SOCKS_WITH_PARAM));
             case "equal":
-                optionalSocks = socksRepository.findByColorAndCottonPartEquals(color, cottonPart);
-                if (optionalSocks.isPresent()) {
-                    return optionalSocks.get().getQuantity();
-                }
-                break;
+                return socksRepository.findByColorAndCottonPartEquals(color, cottonPart)
+                        .map(Socks::getQuantity)
+                        .orElseThrow(() -> new ApiInvalidParameterException(EMPTY_SOCKS_WITH_PARAM));
             default:
                 throw new ApiInvalidParameterException("Operation name has an incorrect format!");
         }
-        throw new ApiInvalidParameterException("No socks of the specified parameters!");
     }
 
 }
