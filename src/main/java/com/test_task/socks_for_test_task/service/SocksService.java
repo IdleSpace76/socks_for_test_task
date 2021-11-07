@@ -21,16 +21,16 @@ public class SocksService {
         this.socksRepository = socksRepository;
     }
 
-    public void income(@NonNull Socks socks) {
-        if (socks.getCottonPart() >= 0 && socks.getCottonPart() <= 100 && socks.getQuantity() > 0){
+    public void income(Socks socks) {
+
             Optional<Socks> socksOptional = socksRepository
                     .findByColorAndCottonPart(socks.getColor(), socks.getCottonPart());
             if (socksOptional.isPresent()) {
                 Socks findSocks = socksOptional.get();
                 findSocks.setQuantity(findSocks.getQuantity() + socks.getQuantity());
-            } else socksRepository.save(socks);
-        }
-        else throw new ApiInvalidParameterException("Request parameters have an incorrect format!");
+            }
+            else socksRepository.save(socks);
+
     }
 
     public void outcome(@NonNull Socks socks) {
