@@ -3,13 +3,13 @@
 [Текст задания](https://github.com/Raiffeisen-DGTL/cib-interns-test-task "Тестовое задание для Java стажеров").
 
 ### Стек:
-- Java
-- Maven
-- Spring Boot + Data JPA + Web
-- PostgreSQL
-- Liquibase
-- Docker
-- Heroku
+- Java 11;
+- Maven;
+- Spring Boot + Data JPA + Web;
+- PostgreSQL;
+- Liquibase;
+- Docker;
+- Heroku.
 ___
 
 Тестирование приложения через Swagger доступно по адресу: http://localhost:8080/swagger.html.<br>

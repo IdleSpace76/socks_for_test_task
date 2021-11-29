@@ -38,7 +38,7 @@ public class SocksService {
     public void outcome(@NonNull Socks socks) {
         Socks findSocks = socksRepository
                 .findByColorAndCottonPart(socks.getColor(), socks.getCottonPart()).orElseThrow(()
-                        -> new ApiInvalidParameterException("No socks of the specified parameters!"));
+                        -> new ApiInvalidParameterException(EMPTY_SOCKS_WITH_PARAM));
         if (findSocks.getQuantity() >= socks.getQuantity()) {
             findSocks.setQuantity(findSocks.getQuantity() - socks.getQuantity());
         }
